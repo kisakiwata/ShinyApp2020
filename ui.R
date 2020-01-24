@@ -35,8 +35,8 @@ shinyUI(
         ),
         sidebarMenu(
             menuItem(text = 'Maps', icon = icon('map-pin'), tabName = 'map'), #change the icon
-            menuItem(text = 'Graphs', icon = icon('chart-bar'), tabName = 'graph'),
             menuItem(text = 'Time Series', icon = icon('chart-line'), tabName = 'time'),
+            menuItem(text = 'Graphs', icon = icon('chart-bar'), tabName = 'graph'),
             menuItem(text = 'Data', icon = icon('table'), tabName = 'data'),
             menuItem(text = 'Documentation', icon = icon('chart-bar'), tabName = 'doc'))
         #selectizeInput("change",
@@ -60,17 +60,18 @@ shinyUI(
                 )
                 )
                 ),
-            tabItem(tabName="graph", 
-                    fluidPage(
-                        fluidRow(box(plotOutput("dens"), height = 400, width = 400)),
-                        fluidRow(box(plotOutput("hist"),height = 400, width = 400))
-                        )
-                    ),
             tabItem(tabName="time", 
                     fluidPage(
-                        fluidRow(box(plotOutput("time"), height = 380, width = 400)),
-                        fluidRow(radioButtons("size", h3("Select Enterprise Size"), choices = choice2))
-                        #label = c("Total", "1-4", "5-9", "10-19", "20-99", "100-499", "<500", "500+")
+                        fluidRow(plotOutput("time"), height = 380, width = 400),
+                        br(),
+                        fluidRow(radioButtons("size", h4("Select Enterprise Size \n (Numer of Employees)"), choices = c("Total"=1, "1-4"=2, "5-9"=3, "10-19"=4, "20-99"=5, "100-499"=6, "<500"=7, "500+"=8)
+                                              ))
+                    )
+            ),
+            tabItem(tabName="graph", 
+                    fluidPage(
+                        fluidRow(box(plotOutput("dens"), height = 400, width = 400))
+                        #fluidRow(box(plotOutput("hist"),height = 400, width = 400))
                     )
             ),
             tabItem(tabName = "data",

@@ -1,0 +1,67 @@
+---
+title: "U.S. Employment and Enterprise Size Change"
+author: "NYC Data Science Academy - Kisaki Watanabe"
+date: "1/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+## Job Growth - "Are people getting hired?", "If so, where?"
+The main goal of this EDA was to find out if there had been employment growth
+in the U.S. for the past several years, and if so, particulary in which state we can see the growth.
+Also, by narrowing down the changes by industry, the chart makes it easier to see exactly which industry is booming. Additionally, I added time-series graphs to show the growth by year and entperise size to analyze in what company size, we can see the most growth.
+
+## Data Summary
+Based on the dataset from Census Bureau, <https://www.census.gov/data/tables/2016/econ/susb/2016-susb-employment.html>, "Statistics of US Business (SUSB) Employment Change Data Tables" was retrieved for the changes from 2010 to 2016.
+Each dataset records birth and death of employment and expansion, and contractin of establishment (enteprise count) by industry classification based on 2012 North American Industry Classification System (NAICS) codes.
+<https://www.census.gov/programs-surveys/susb/technical-documentation/methodology.html>
+
+After reviewing the excel datasets, text file versins were combined in global.R.
+Github link: <https://github.com/kisakiwata/ShinyApp2020>
+
+## Charts and Plots
+### Heat Map - Industry
+The first chart in "map" tab displays statistics on the employment change in 2015-2016 (latest economic census) in the U.S. by state. Boxes on the top show state of minimum change and maximum change (including negative changes) based on the users' selected industry. Additionally, it shows the average chagne of the industry on the top right corner.
+
+This heat map shows the following industries have the highest average growth:
+Construction 4.6%
+Arts, Entertainment, and Recreation 3.5%
+Finance and Insurance 3%
+Educational Services 3%
+
+Lowest industry:
+Mining, Quarrying, and Oil and Gas Extraction -10.7%
+
+- Some industries have concentraion of growth in some states (e.g. 23.2% growth in D.C. for Arts, Entertainment, and Recreation), but other industries displayed more general growth at most of states (e.g. Professional, Scientific, and Technical Services)
+
+### Time Series
+On the second time-series tab, it shows that from 2010 to 2016, there were 
+ups and downs both in employment and enterprise counts. It is notable that especially in 2010 and 2011, there were negative changes in the number of enterprises.
+However, from 2012, the changes had been positive and it is possible to predict there will be positive numbers of employment/establishments from 2017 onwards.
+
+When you select enterprise size, you can see that the smaller the enterprise size is, there is an increasing growth in the employment. It has to be noted that smallest enteprises did not even show negative changes when the entprises of other sizes suffered the decrease.
+The largest enterprise size, companies that employ more than 500 employees, showed slowest growth.
+
+On the third time series tab, it shows the density plot in 2015-2016. This shows that the change was 0.2 and the change was positive and increasing.
+
+
+## Conclusion
+Overall, the numbers from the dataset displays postive changes in most of industries over the recent years.
+If one is looking for a job, it would be advisable to look for employment at smaller companies. Also, it should be noted that if you are shifting your career towards construction, arts, entertainment and recreation, finance and insurance, or educational services, the changes of employment are relatively high.
+
+The next step of this research project could be to confirm the predicted positive changes based on the next economic census results to be released in next few years.
+
+
+### Statistics of US Business (SUSB)
+
+The Business Register is the Census Bureau’s source of information on employer establishments included in the Statistics of U.S. Businesses (SUSB) program. The Business Register is a multi-relational database that contains a record for each known establishment that is located in the United States or Puerto Rico and has employees. 
+
+### Github
+
+<https://github.com/kisakiwata/ShinyApp2020>
+
+
+

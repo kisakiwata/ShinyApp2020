@@ -29,20 +29,8 @@ shinyServer(function(input, output, session){
             ggtitle("   Employment Change 2016 (Total)") +
             xlab("")
         )
-
-     output$hist <- renderPlot(
-       ent.df %>% 
-           filter(., industry.name==input$change) %>%
-           #group_by(., enterprise.size) %>% 
-           #use gather()
-           ggplot(.,) +
-           geom_col(data=ent.df, aes(x=enterprise.size, fill=Employment.Change), col=enterprise.size)+
-           ggtitle("   Employment Change by Enterprise Size") +
-           xlab("Enterprise Size") +
-           ylab("Employment Change") + 
-           scale_fill_brewer(palette='Pastel1') +
-           theme_bw()
-    )
+     #output$hist <- renderPlot(
+    #)
      d <- reactive({
          detach(package:plyr)
          library(tidyr)
@@ -57,22 +45,19 @@ shinyServer(function(input, output, session){
          
          df3$Net.Change = as.numeric(as.character(df3$Net.Change))
          df3$enterprise.size = as.numeric(as.character(df3$enterprise.size))
-         
-         df3 = df3 %>% 
-             filter(., enterprise.size==input$size)
-         
      })
      
      output$time <- renderPlot(
          
          df3 %>% 
-             ggplot(.,aes(x=as.factor(year),y=Net.Change)) + #as.numeric(levels(
+             filter(., enterprise.size==input$size) %>% 
+             ggplot(.,aes(x=as.factor(year),y=as.numeric(as.character(Net.Change)))) + 
              geom_bar(aes(fill=Type), stat='identity',position='dodge') + 
              theme_bw() +
              ylab("Net Change") +
              xlab("Year") +
-             ggtitle("2010-2016 Net Change from Previous Year - Enterprise and Employment") +
-             scale_fill_discrete(name = "", labels = c("Employment", "Establishment"))
+             ggtitle("2010-2016 Net Change - Enterprise and Employment") +
+             scale_fill_discrete(name = "", labels = c("Employment", "Enterprise"))
      )
     # show data using DataTable
     output$table <- DT::renderDataTable({
