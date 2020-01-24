@@ -10,6 +10,7 @@ shinyUI(
         skin="blue",
     dashboardHeader(
         title = "U.S. Employment and Business Size Change",
+        #title="2015-2016 Employment Change by State (%)",
         titleWidth = 1000,
         #tags$li("Kisaki Watanabe",
                 #style = 'text-align: right; padding-right: 13px; padding-top:17px; font-family: Roboto, sans-serif;
@@ -20,7 +21,7 @@ shinyUI(
                       title = "Kisaki's LinkedIn", 
                       height = "19px")),
                 class = "dropdown"),
-       tags$li(a(href = 'https://github.com/kisakiwata/hello-world.git',
+       tags$li(a(href = 'https://github.com/kisakiwata/ShinyApp2020.git',
                   img(src = 'github.png',
                       title = "Github Repository", 
                       height = "19px")),
@@ -35,6 +36,7 @@ shinyUI(
         sidebarMenu(
             menuItem(text = 'Maps', icon = icon('map-pin'), tabName = 'map'), #change the icon
             menuItem(text = 'Graphs', icon = icon('chart-bar'), tabName = 'graph'),
+            menuItem(text = 'Time Series', icon = icon('chart-line'), tabName = 'time'),
             menuItem(text = 'Data', icon = icon('table'), tabName = 'data'),
             menuItem(text = 'Documentation', icon = icon('chart-bar'), tabName = 'doc'))
         #selectizeInput("change",
@@ -59,7 +61,18 @@ shinyUI(
                 )
                 ),
             tabItem(tabName="graph", 
-                    box(plotOutput("hist"), height = 700, width = 700)),
+                    fluidPage(
+                        fluidRow(box(plotOutput("dens"), height = 400, width = 400)),
+                        fluidRow(box(plotOutput("hist"),height = 400, width = 400))
+                        )
+                    ),
+            tabItem(tabName="time", 
+                    fluidPage(
+                        fluidRow(box(plotOutput("time"), height = 380, width = 400)),
+                        fluidRow(radioButtons("size", h3("Select Enterprise Size"), choices = choice2))
+                        #label = c("Total", "1-4", "5-9", "10-19", "20-99", "100-499", "<500", "500+")
+                    )
+            ),
             tabItem(tabName = "data",
                     fluidRow(box(DT::dataTableOutput("table"), width = 12))),
             tabItem(tabName = "doc", 
