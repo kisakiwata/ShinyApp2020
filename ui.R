@@ -68,8 +68,8 @@ shinyUI(
             ),
             tabItem(tabName="graph", 
                     fluidPage(
-                        fluidRow(box(plotOutput("dens"), height = 400, width = 400))
-                        #fluidRow(box(plotOutput("hist"),height = 400, width = 400))
+                        fluidRow(plotOutput("dens"), height = 400, width = 400),
+                        fluidRow(plotOutput("scatter"),height = 400, width = 400)
                     )
             ),
             tabItem(tabName = "data",

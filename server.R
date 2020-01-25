@@ -26,8 +26,19 @@ shinyServer(function(input, output, session){
             ggtitle("   Employment Change 2016 (Total)") +
             xlab("")
         )
-     #output$hist <- renderPlot(
-    #)
+     output$scatter <- renderPlot(
+         ent.df %>% 
+             dplyr::filter(., enterprise.size == 1, industry.name==input$change) %>% 
+             ggplot(., aes(x = Establishment.Change, y = Employment.Change)) +
+             geom_point(color='blue',size=4) +
+             xlab("Change of Establishment (%)")+
+             ylab("Change of Employment (%)") +
+             ggtitle("2015-2016 Change by State") +
+             geom_text(aes(label=state.name),
+                       hjust=0.8, vjust=1.4,angle = -30, size=3)+
+             theme_bw()
+         
+    )
      d <- reactive({
          df3 = df2 %>%
              dplyr::filter(., state.name == "United States") %>% 

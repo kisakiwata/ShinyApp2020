@@ -36,7 +36,7 @@ spread(., industry.name, "Employment.Change")
 #df = dcast(setDT(df), state.name ~ industry.name, value.var = c("Establishment.Change", "Employment.Change"))
 
 #Choice option for selectizeInput in ui.R
-choice1 = colnames(map.df %>% select(., -state.name, -Total, -`Industries not classified`))
+choice1 = colnames(map.df %>% select(., -state.name, -`Industries not classified`))
 
 
 ######### This is for the second plot #########
@@ -48,9 +48,8 @@ ent.df = employment_change %>%
 
 #Selecting columns and renaming them.
 ent.df = ent.df %>%
-  select(., STATEDSCR, ENTRSIZE, NCSDSCR, PCTCHG_EMPL) %>% 
-  plyr::rename(., c("STATEDSCR"="state.name", "ENTRSIZE"="enterprise.size", "NCSDSCR"="industry.name", "PCTCHG_EMPL"="Employment.Change"))
-
+  select(., STATEDSCR, ENTRSIZE, NCSDSCR, PCTCHG_ESTB, PCTCHG_EMPL) %>% 
+  plyr::rename(., c("STATEDSCR"="state.name", "ENTRSIZE"="enterprise.size", "NCSDSCR"="industry.name", "PCTCHG_ESTB"="Establishment.Change", "PCTCHG_EMPL"="Employment.Change"))
 
 ################ Plot for 2010 - 2016 from all the text files
 #### moved to OUTPUT file
@@ -60,7 +59,7 @@ files = list.files(pattern="*.txt")
 # First apply read.csv, then rbind
 handle_each <- function(x){
   year <- as.numeric(gsub("[^0-9]+", "", x),perl=TRUE) 
-  temp <- read.csv(x, header = FALSE, stringsAsFactors = FALSE)
+  temp <- read.csv(x, header = FALSE, sep = ',', stringsAsFactors = FALSE)
   temp$year <- year
   return(temp)
 }
