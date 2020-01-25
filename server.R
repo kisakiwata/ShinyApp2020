@@ -1,9 +1,6 @@
 library(DT)
-library(shiny)
-library(googleVis)
-library(tidyverse)
 library(RColorBrewer)
-
+#detach(package:plyr)
 
 shinyServer(function(input, output, session){
     # show map using googleVis
@@ -32,13 +29,9 @@ shinyServer(function(input, output, session){
      #output$hist <- renderPlot(
     #)
      d <- reactive({
-         detach(package:plyr)
-         library(tidyr)
-         library(scale_colour_brewer)
-         
          df3 = df2 %>%
-             filter(., state.name == "United States") %>% 
-             filter(., industry=="Total") %>% 
+             dplyr::filter(., state.name == "United States") %>% 
+             dplyr::filter(., industry=="Total") %>% 
              slice(., 1:56) %>% 
              select(., year, enterprise.size, Net.Change.Est, Net.Change.Emp) %>% 
              gather(., key="Type", value="Net.Change", Net.Change.Est, Net.Change.Emp)
@@ -48,9 +41,8 @@ shinyServer(function(input, output, session){
      })
      
      output$time <- renderPlot(
-         
          df3 %>% 
-             filter(., enterprise.size==input$size) %>% 
+             dplyr::filter(., enterprise.size==input$size) %>% 
              ggplot(.,aes(x=as.factor(year),y=as.numeric(as.character(Net.Change)))) + 
              geom_bar(aes(fill=Type), stat='identity',position='dodge') + 
              theme_bw() +

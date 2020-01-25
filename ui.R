@@ -1,7 +1,5 @@
 library(DT)
-library(shiny)
-library(shinydashboard)
-library(tidyverse)
+
 #suppressPackageStartupMessages(library(googleVis))
 
 
