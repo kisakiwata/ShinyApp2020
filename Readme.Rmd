@@ -1,7 +1,7 @@
 ---
 title: "U.S. Employment and Enterprise Size Change"
 author: "NYC Data Science Academy - Kisaki Watanabe"
-date: "1/14/2020"
+date: "1/26/2020"
 output: html_document
 ---
 
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
 ## Job Growth - "Are people getting hired?", "If so, where?"
 The main goal of this EDA was to find out if there had been employment growth
 in the U.S. for the past several years, and if so, particulary in which state we can see the growth.
-Also, by narrowing down the changes by industry, the chart makes it easier to see exactly which industry is booming. Additionally, I added time-series graphs to show the growth by year and entperise size to analyze in what company size, we can see the most growth.
+Also, by narrowing down the changes by industry, the charts make it easier for the audience to see exactly which industry is booming. Additionally, I added time-series graphs to show the growth by year and entperise size to analyze in what company size, we can see the most growth. (For website application, the data size of time series was heavy and web application is lacking this tab. But you can find all included in the codes found in the github.)
 
 ## Data Summary
 Based on the dataset from Census Bureau, <https://www.census.gov/data/tables/2016/econ/susb/2016-susb-employment.html>, "Statistics of US Business (SUSB) Employment Change Data Tables" was retrieved for the changes from 2010 to 2016.

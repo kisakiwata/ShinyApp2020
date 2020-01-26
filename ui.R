@@ -32,14 +32,12 @@ shinyUI(
             subtitle = 'NYC Data Science Fellow'
         ),
         sidebarMenu(
-            menuItem(text = 'Maps', icon = icon('map-pin'), tabName = 'map'), #change the icon
+            menuItem(text = 'Maps', icon = icon('map-pin'), tabName = 'map'), 
             menuItem(text = 'Time Series', icon = icon('chart-line'), tabName = 'time'),
             menuItem(text = 'Graphs', icon = icon('chart-bar'), tabName = 'graph'),
             menuItem(text = 'Data', icon = icon('table'), tabName = 'data'),
-            menuItem(text = 'Documentation', icon = icon('chart-bar'), tabName = 'doc'))
-        #selectizeInput("change",
-                   #"Select Industry",
-                   #choices=choice1)
+            menuItem(text = 'Documentation', icon = icon('chart-bar'), tabName = 'doc'),
+            selectizeInput("change","Select Industry", choices=choice1, selected="Total"))
     ),
     dashboardBody(
         tags$head(
@@ -52,10 +50,9 @@ shinyUI(
                 fluidRow(infoBoxOutput("maxBox"),
                          infoBoxOutput("minBox"),
                          infoBoxOutput("avgBox")),
-                fluidRow(column(8, box(htmlOutput("map"), height = 600, width = 300)),
-                column(4, radioButtons("change", h3("Select Industry"),
-                                              choices = choice1))
-                )
+                fluidRow(htmlOutput("map"), height = 600, width = 600)
+                #column(4, radioButtons("change", h3("Select Industry"),
+                                              #choices = choice1))
                 )
                 ),
             tabItem(tabName="time", 
@@ -68,8 +65,8 @@ shinyUI(
             ),
             tabItem(tabName="graph", 
                     fluidPage(
-                        fluidRow(plotOutput("dens"), height = 400, width = 400),
-                        fluidRow(plotOutput("scatter"),height = 400, width = 400)
+                        fluidRow(plotOutput("scatter"),height = 400, width = 400),
+                        fluidRow(plotOutput("dens"), height = 400, width = 400)
                     )
             ),
             tabItem(tabName = "data",

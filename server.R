@@ -3,7 +3,7 @@ library(RColorBrewer)
 #detach(package:plyr)
 
 shinyServer(function(input, output, session){
-    # show map using googleVis
+    
     output$map <- renderGvis({
         gvisGeoChart(map.df, "state.name", input$change,
                      options=list(region="US", displayMode="regions", 
@@ -15,10 +15,8 @@ shinyServer(function(input, output, session){
         )
     })
     
-    # show histogram using googleVis
     output$dens <- renderPlot(
         df %>% 
-            #group_by(., industry.name, Employment.Change) %>% 
             ggplot(., aes(x=Employment.Change)) +
             geom_density(se=FALSE, color="darkblue", fill="lightblue") + 
             geom_vline(aes(xintercept=mean(Employment.Change)),
@@ -62,13 +60,13 @@ shinyServer(function(input, output, session){
              ggtitle("2010-2016 Net Change - Enterprise and Employment") +
              scale_fill_discrete(name = "", labels = c("Employment", "Enterprise"))
      )
-    # show data using DataTable
+    
     output$table <- DT::renderDataTable({
         datatable(map.df) %>% 
             formatStyle(input$change, background="skyblue", fontWeight='bold')
     })
     
-    # show statistics using infoBox
+    
     output$maxBox <- renderInfoBox({
         max_value <- max(map.df[,input$change])
         max_state <- 
